@@ -55,6 +55,7 @@
             background-color: #6b4e9e;
             border-radius: 15px;
             margin-bottom: 20px;
+            position: relative;
         }
 
         .header h1 {
@@ -69,6 +70,22 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
+        }
+
+        .language-selector {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .language-selector select {
+            padding: 5px;
+            border-radius: 5px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-size: 14px;
         }
 
         .content {
@@ -190,6 +207,24 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+        }
+
+        #home-screen .pickup-info,
+        #home-screen .hospital-options {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #home-screen .hospital-options .hospital {
+            background-color: #457b9d;
+            margin: 5px 0;
+        }
+
+        #home-screen .eta-info {
+            color: white;
+            text-align: center;
+            display: none;
         }
 
         /* Blood Donation Screen */
@@ -327,7 +362,6 @@
 
         #chat-screen .input-bar {
             display: flex;
-            align executables
             align-items: center;
             gap: 10px;
             padding: 10px;
@@ -370,10 +404,18 @@
         <!-- Splash Screen -->
         <div class="screen active" id="splash-screen">
             <div class="header">
-                <h1>EmergencyCare Connect</h1>
+                <h1 data-en="EmergencyCare Connect" data-odia="ଇମରଜେନ୍ସି କେୟାର କନେକ୍ଟ">EmergencyCare Connect</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
-                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency">SOS</a>
+                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency" data-en="SOS" data-odia="ଏସଓଏସ">SOS</a>
                 <div class="options">
                     <div class="option"><i class="fas fa-ambulance"></i></div>
                     <div class="option"><i class="fas fa-tint"></i></div>
@@ -393,12 +435,20 @@
         <!-- Onboarding Screen -->
         <div class="screen" id="onboarding-screen">
             <div class="header">
-                <h1>SOS Activated</h1>
+                <h1 data-en="SOS Activated" data-odia="ଏସଓଏସ ସକ୍ରିୟ ହେଲା">SOS Activated</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <div class="alert-icon">!</div>
-                <p style="color: white; text-align: center;">Help is on the way</p>
-                <a href="#" class="button" style="background-color: #000;" onclick="navigateTo('splash-screen')" aria-label="Cancel SOS">CANCEL</a>
+                <p style="color: white; text-align: center;" data-en="Help is on the way" data-odia="ସାହାଯ୍ୟ ରାସ୍ତାରେ ଅଛି">Help is on the way</p>
+                <a href="#" class="button" style="background-color: #000;" onclick="navigateTo('splash-screen')" aria-label="Cancel SOS" data-en="CANCEL" data-odia="ବାତିଲ କରନ୍ତୁ">CANCEL</a>
             </div>
             <div class="nav-bar">
                 <i class="fas fa-home" onclick="navigateTo('splash-screen')"></i>
@@ -413,18 +463,27 @@
         <div class="screen" id="home-screen">
             <div class="header">
                 <i class="fas fa-arrow-left back-btn" onclick="navigateTo('splash-screen')"></i>
-                <h1>Amin</h1>
+                <h1 data-en="Amin" data-odia="ଆମିନ">Amin</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
-                <div class="map-placeholder">Map Placeholder</div>
-                <div class="options">
-                    <div class="option">Q</div>
-                    <div class="option">A</div>
-                    <div class="option">H</div>
-                    <div class="option">H</div>
-                    <div class="option">R</div>
-                    <div class="option">A</div>
-                    <div class="option">G</div>
+                <div class="pickup-info">
+                    <p data-en="Pickup: Yello Living, Whitefield, Bangalore" data-odia="ପିକଅପ୍: ୟେଲୋ ଲିଭିଂ, ହ୍ୱାଇଟଫିଲ୍ଡ, ବାଙ୍ଗାଲୋର">Pickup: Yello Living, Whitefield, Bangalore</p>
+                </div>
+                <div class="hospital-options" id="hospital-options">
+                    <p data-en="Select Hospital for Drop-Off:" data-odia="ଡ୍ରପ୍-ଅଫ୍ ପାଇଁ ହସ୍ପିଟାଲ ଚୟନ କରନ୍ତୁ:">Select Hospital for Drop-Off:</p>
+                    <a href="#" class="button hospital" onclick="selectHospital('Manipal Hospital', '5 km', '15 mins')" data-en="Manipal Hospital (5 km, 15 mins)" data-odia="ମଣିପାଲ ହସ୍ପିଟାଲ (୫ କି.ମି., ୧୫ ମିନିଟ୍)">Manipal Hospital (5 km, 15 mins)</a>
+                    <a href="#" class="button hospital" onclick="selectHospital('Satya Sai Hospital', '7 km', '20 mins')" data-en="Satya Sai Hospital (7 km, 20 mins)" data-odia="ସତ୍ୟ ସାଇ ହସ୍ପିଟାଲ (୭ କି.ମି., ୨୦ ମିନିଟ୍)">Satya Sai Hospital (7 km, 20 mins)</a>
+                </div>
+                <div class="eta-info" id="eta-info">
+                    <p id="eta-text" data-en="ETA to " data-odia="ପହଞ୍ଚିବା ସମୟ ">ETA to </p>
                 </div>
             </div>
             <div class="nav-bar">
@@ -440,12 +499,20 @@
         <div class="screen" id="blood-donation-screen">
             <div class="header">
                 <i class="fas fa-arrow-left back-btn" onclick="navigateTo('splash-screen')"></i>
-                <h1>Blood Donation Needed</h1>
+                <h1 data-en="Blood Donation Needed" data-odia="ରକ୍ତ ଦାନ ଆବଶ୍ୟକ">Blood Donation Needed</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <i class="fas fa-tint blood-icon"></i>
-                <p style="color: white; text-align: center;">A local hospital requests blood donors</p>
-                <a href="#" class="button action-button" onclick="takeAction()" aria-label="Take Action">TAKE ACTION</a>
+                <p style="color: white; text-align: center;" data-en="A local hospital requests blood donors" data-odia="ଏକ ସ୍ଥାନୀୟ ହସ୍ପିଟାଲ ରକ୍ତ ଦାତା ମାଗୁଛି">A local hospital requests blood donors</p>
+                <a href="#" class="button action-button" onclick="takeAction()" aria-label="Take Action" data-en="TAKE ACTION" data-odia="କାର୍ଯ୍ୟ କରନ୍ତୁ">TAKE ACTION</a>
             </div>
             <div class="nav-bar">
                 <i class="fas fa-home" onclick="navigateTo('splash-screen')"></i>
@@ -460,14 +527,22 @@
         <div class="screen" id="resuscitation-screen">
             <div class="header">
                 <i class="fas fa-arrow-left back-btn" onclick="navigateTo('splash-screen')"></i>
-                <h1>Resuscitation Mode</h1>
+                <h1 data-en="Resuscitation Mode" data-odia="ପୁନର୍ଜନ୍ମ ମୋଡ୍">Resuscitation Mode</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <div class="tabs">
-                    <div class="tab active" onclick="switchTab(this)">TAMEA</div>
-                    <div class="tab" onclick="switchTab(this)">CSSTM</div>
+                    <div class="tab active" onclick="switchTab(this)" data-en="TAMEA" data-odia="ଟାମିଆ">TAMEA</div>
+                    <div class="tab" onclick="switchTab(this)" data-en="CSSTM" data-odia="ସିଏସଏସଟିଏମ">CSSTM</div>
                 </div>
-                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency">SOS</a>
+                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency" data-en="SOS" data-odia="ଏସଓଏସ">SOS</a>
             </div>
             <div class="nav-bar">
                 <i class="fas fa-home" onclick="navigateTo('splash-screen')"></i>
@@ -481,14 +556,22 @@
         <!-- Disaster Mode Screen -->
         <div class="screen" id="disaster-mode-screen">
             <div class="header">
-                <h1>Disaster Mode</h1>
+                <h1 data-en="Disaster Mode" data-odia="ବିପର୍ଯ୍ୟୟ ମୋଡ୍">Disaster Mode</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <div class="grid">
-                    <div class="item">Emergency List</div>
-                    <div class="item">Updates</div>
-                    <div class="item">Shelters</div>
-                    <div class="item">Resources</div>
+                    <div class="item" data-en="Emergency List" data-odia="ଜରୁରୀ ତାଲିକା">Emergency List</div>
+                    <div class="item" data-en="Updates" data-odia="ଅପଡେଟ୍">Updates</div>
+                    <div class="item" data-en="Shelters" data-odia="ଆଶ୍ରୟସ୍ଥଳ">Shelters</div>
+                    <div class="item" data-en="Resources" data-odia="ସମ୍ବଳ">Resources</div>
                 </div>
             </div>
             <div class="nav-bar">
@@ -503,16 +586,24 @@
         <!-- Elder Network Screen -->
         <div class="screen" id="elder-network-screen">
             <div class="header">
-                <h1>Elder Network</h1>
+                <h1 data-en="Elder Network" data-odia="ବୃଦ୍ଧ ନେଟଓ୍ୱାର୍କ">Elder Network</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
-                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency">SOS</a>
+                <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" aria-label="SOS Emergency" data-en="SOS" data-odia="ଏସଓଏସ">SOS</a>
                 <div class="volunteers">
-                    <h3 style="color: white;">Volunteers</h3>
+                    <h3 style="color: white;" data-en="Volunteers" data-odia="ସ୍ୱେଚ୍ଛାସେବୀ">Volunteers</h3>
                     <div class="volunteer"><i class="fas fa-user"></i> 24</div>
-                    <h3 style="color: white;">Requests</h3>
+                    <h3 style="color: white;" data-en="Requests" data-odia="ଅନୁରୋଧ">Requests</h3>
                     <div class="volunteer"><i class="fas fa-user"></i> 7</div>
-                    <h3 style="color: white;">Assist Volunteer</h3>
+                    <h3 style="color: white;" data-en="Assist Volunteer" data-odia="ସହାୟତା ସ୍ୱେଚ୍ଛାସେବୀ">Assist Volunteer</h3>
                     <div class="volunteer"><i class="fas fa-user"></i> 43m - 30km</div>
                     <div class="volunteer"><i class="fas fa-user"></i> 35m - 50km</div>
                 </div>
@@ -529,15 +620,23 @@
         <!-- Post-Emergency Report Screen -->
         <div class="screen" id="report-screen">
             <div class="header">
-                <h1>Post-Emergency Report</h1>
+                <h1 data-en="Post-Emergency Report" data-odia="ଜରୁରୀକାଳୀନ ରିପୋର୍ଟ">Post-Emergency Report</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <div class="form" id="report-form">
-                    <input type="text" placeholder="Report Title" id="report-title">
-                    <input type="text" placeholder="Location" id="report-location">
-                    <input type="text" placeholder="Date & Time" id="report-datetime">
-                    <textarea placeholder="Description" rows="4" id="report-description"></textarea>
-                    <a href="#" class="button submit-button" onclick="submitReport()" aria-label="Submit Report">SUBMIT</a>
+                    <input type="text" placeholder="Report Title" id="report-title" data-en-placeholder="Report Title" data-odia-placeholder="ରିପୋର୍ଟ ଶୀର୍ଷକ">
+                    <input type="text" placeholder="Location" id="report-location" data-en-placeholder="Location" data-odia-placeholder="ସ୍ଥାନ">
+                    <input type="text" placeholder="Date & Time" id="report-datetime" data-en-placeholder="Date & Time" data-odia-placeholder="ତାରିଖ ଓ ସମୟ">
+                    <textarea placeholder="Description" rows="4" id="report-description" data-en-placeholder="Description" data-odia-placeholder="ବିବରଣୀ"></textarea>
+                    <a href="#" class="button submit-button" onclick="submitReport()" aria-label="Submit Report" data-en="SUBMIT" data-odia="ଜମା ଦିଅନ୍ତୁ">SUBMIT</a>
                 </div>
             </div>
             <div class="nav-bar">
@@ -552,15 +651,23 @@
         <!-- AI Chat Companion Screen -->
         <div class="screen" id="chat-screen">
             <div class="header">
-                <h1>AI Chat Companion</h1>
+                <h1 data-en="AI Chat Companion" data-odia="ଏଆଇ ଚାଟ୍ ସଙ୍ଗୀ">AI Chat Companion</h1>
+                <div class="language-selector">
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="odia">Odia</option>
+                        <option value="ta">Tamil</option>
+                    </select>
+                </div>
             </div>
             <div class="content">
                 <div class="messages" id="chat-messages">
-                    <div class="message">Hello! How can I assist you today?</div>
-                    <div class="message right">I need help with an emergency.</div>
+                    <div class="message" data-en="Hello! How can I assist you today?" data-odia="ନମସ୍କାର! ମୁଁ ଆଜି ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ୟ କରିପାରିବି?">Hello! How can I assist you today?</div>
+                    <div class="message right" data-en="I need help with an emergency." data-odia="ମୁଁ ଏକ ଜରୁରୀ ସାହାଯ୍ୟ ଆବଶ୍ୟକ କରୁଛି।">I need help with an emergency.</div>
                 </div>
                 <div class="input-bar">
-                    <input type="text" placeholder="Send a message..." id="chat-input">
+                    <input type="text" id="chat-input" data-en-placeholder="Send a message..." data-odia-placeholder="ଏକ ସନ୍ଦେଶ ପଠାନ୍ତୁ...">
                     <i class="fas fa-paper-plane" onclick="sendMessage()"></i>
                 </div>
             </div>
@@ -575,6 +682,13 @@
     </div>
 
     <script>
+        // Initialize language from localStorage
+        let currentLanguage = localStorage.getItem('language') || 'en';
+        document.querySelectorAll('#language-select').forEach(select => {
+            select.value = currentLanguage;
+        });
+        changeLanguage();
+
         // Navigation function to switch between screens
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
@@ -593,9 +707,62 @@
             }, 2000);
         }
 
+        // Change language and update content
+        function changeLanguage() {
+            currentLanguage = document.querySelector('#language-select').value;
+            localStorage.setItem('language', currentLanguage);
+
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const key = currentLanguage === 'en' ? 'en' : currentLanguage;
+                element.textContent = element.getAttribute(`data-${key}`);
+            });
+
+            document.querySelectorAll('input[data-en-placeholder], textarea[data-en-placeholder]').forEach(element => {
+                const key = currentLanguage === 'en' ? 'en' : currentLanguage;
+                element.placeholder = element.getAttribute(`data-${key}-placeholder`);
+            });
+
+            // Update ETA text dynamically if visible
+            const etaText = document.getElementById('eta-text');
+            if (etaText && etaText.dataset.hospital) {
+                const hospital = etaText.dataset.hospital;
+                const distance = etaText.dataset.distance;
+                const time = etaText.dataset.time;
+                etaText.textContent = currentLanguage === 'en' ? `ETA to ${hospital}: ${distance}, ${time}` : `ପହଞ୍ଚିବା ସମୟ ${hospital}: ${distance}, ${time}`;
+            }
+        }
+
+        // Handle hospital selection on Home/Dashboard screen
+        function selectHospital(hospital, distance, time) {
+            const hospitalOptions = document.getElementById('hospital-options');
+            const etaInfo = document.getElementById('eta-info');
+            const etaText = document.getElementById('eta-text');
+
+            hospitalOptions.style.display = 'none';
+            etaInfo.style.display = 'block';
+            etaText.dataset.hospital = hospital;
+            etaText.dataset.distance = distance;
+            etaText.dataset.time = time;
+            etaText.textContent = currentLanguage === 'en' ? `ETA to ${hospital}: ${distance}, ${time}` : `ପହଞ୍ଚିବା ସମୟ ${hospital}: ${distance}, ${time}`;
+
+            showNotification(currentLanguage === 'en' ? `Ambulance dispatched to ${hospital}!` : `${hospital} କୁ ଆମ୍ବୁଲାନ୍ସ ପଠାଯାଇଛି!`);
+
+            // Simulate ETA updates
+            let remainingTime = parseInt(time);
+            const interval = setInterval(() => {
+                remainingTime--;
+                if (remainingTime <= 0) {
+                    clearInterval(interval);
+                    etaText.textContent = currentLanguage === 'en' ? `Arrived at ${hospital}` : `${hospital} ରେ ପହଞ୍ଚିଗଲା`;
+                    return;
+                }
+                etaText.textContent = currentLanguage === 'en' ? `ETA to ${hospital}: ${distance}, ${remainingTime} mins` : `ପହଞ୍ଚିବା ସମୟ ${hospital}: ${distance}, ${remainingTime} ମିନିଟ୍`;
+            }, 1000);
+        }
+
         // Handle "Take Action" button on Blood Donation screen
         function takeAction() {
-            showNotification('Blood Donation Request Accepted!');
+            showNotification(currentLanguage === 'en' ? 'Blood Donation Request Accepted!' : 'ରକ୍ତ ଦାନ ଅନୁରୋଧ ଗ୍ରହଣ କରାଗଲା!');
             setTimeout(() => navigateTo('splash-screen'), 2000);
         }
 
@@ -615,11 +782,11 @@
             const description = document.getElementById('report-description').value;
 
             if (title && location && datetime && description) {
-                showNotification('Report Submitted Successfully!');
+                showNotification(currentLanguage === 'en' ? 'Report Submitted Successfully!' : 'ରିପୋର୍ଟ ସଫଳତାର ସହିତ ଜମା ହେଲା!');
                 document.getElementById('report-form').reset();
                 setTimeout(() => navigateTo('splash-screen'), 2000);
             } else {
-                showNotification('Please fill all fields.');
+                showNotification(currentLanguage === 'en' ? 'Please fill all fields.' : 'ଦୟାକରି ସମସ୍ତ କ୍ଷେତ୍ର ପୂରଣ କରନ୍ତୁ।');
             }
         }
 
@@ -639,7 +806,7 @@
                 setTimeout(() => {
                     const aiMessage = document.createElement('div');
                     aiMessage.classList.add('message');
-                    aiMessage.textContent = 'I’m here to help! What kind of emergency is it?';
+                    aiMessage.textContent = currentLanguage === 'en' ? 'I’m here to help! What kind of emergency is it?' : 'ମୁଁ ସାହାଯ୍ୟ କରିବାକୁ ଅଛି! ଏହା କି ପ୍ରକାରର ଜରୁରୀକାଳୀନ ଅଟେ?';
                     messages.appendChild(aiMessage);
 
                     // Scroll to bottom
