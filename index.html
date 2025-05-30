@@ -59,6 +59,8 @@
         .nav-item:hover .nav-tooltip {
             opacity: 1;
         }
+
+        
     </style>
 </head>
 <body>
@@ -81,11 +83,13 @@
             </div>
             <div class="content">
                 <a href="#" class="button sos-button" onclick="navigateTo('onboarding-screen')" title="Activate SOS for emergencies" data-en="SOS" data-hi="एसओएस" data-odia="ଏସଓଏସ" data-kn="ಎಸ್‌ಒಎಸ್">SOS</a>
-                <div class="options">
-                    <div class="option"><i class="fas fa-ambulance"></i></div>
-                    <div class="option"><i class="fas fa-tint"></i></div>
-                    <div class="option"><i class="fas fa-heartbeat"></i></div>
-                    <div class="option"><i class="fas fa-desktop"></i></div>
+                <div class="login-card">
+                    <h5 class="text-white">Login to Access More Features</h5>
+                    <input type="text" placeholder="Username" class="form-control mb-2">
+                    <input type="password" placeholder="Password" class="form-control mb-2">
+                    <button class="btn btn-primary w-100" type="submit">Login</button>
+                    <!-- <button class="btn btn-light w-100">Login</button> -->
+                    <p class="text-center mt-2 text-white" style="font-size: 12px;">New user? <a href="#">Sign up</a></p>
                 </div>
             </div>
             <div class="nav-bar d-flex">
