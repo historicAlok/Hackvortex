@@ -230,7 +230,7 @@
 
                     <!-- Donor Form -->
                     <div class="form-section" id="donor-form" style="display: none;">
-                        <input type="text" id="donor-name" data-en-placeholder="Donor Name" data-hi-placeholder="दाता का नाम" data-odia-placeholder="ଦାତାଙ୍କ ନାମ" data-kn-placeholder="ದಾನಿಯ ಹೆಸರು">
+                        <input type="text" id="donor-name" placeholder="Donor Name" data-en-placeholder="Donor Name" data-hi-placeholder="दाता का नाम" data-odia-placeholder="ଦାତାଙ୍କ ନାମ" data-kn-placeholder="ದಾನಿಯ ಹೆಸರು">
                         <select id="donor-blood-group">
                             <option value="" data-en="Select Blood Group" data-hi="रक्त समूह चुनें" data-odia="ରକ୍ତ ଗ୍ରୁପ୍ ଚୟନ କରନ୍ତୁ" data-kn="ರಕ್ತದ ಗುಂಪು ಆಯ್ಕೆಮಾಡಿ">Select Blood Group</option>
                             <option value="A+">A+</option>
@@ -242,13 +242,13 @@
                             <option value="O+">O+</option>
                             <option value="O-">O-</option>
                         </select>
-                        <input type="text" id="donor-contact" data-en-placeholder="Contact Number" data-hi-placeholder="संपर्क नंबर" data-odia-placeholder="ସମ୍ପର୍କ ନମ୍ବର" data-kn-placeholder="ಸಂಪರ್ಕ ಸಂಖ್ಯೆ">
+                        <input type="text" id="donor-contact" placeholder="Contact Number" data-en-placeholder="Contact Number" data-hi-placeholder="संपर्क नंबर" data-odia-placeholder="ସମ୍ପର୍କ ନମ୍ବର" data-kn-placeholder="ಸಂಪರ್ಕ ಸಂಖ್ಯೆ">
                         <a href="#" class="button submit-button" onclick="submitBloodForm('donor')" title="Submit donor details" data-en="SUBMIT" data-hi="जमा करें" data-odia="ଜମା ଦିଅନ୍ତୁ" data-kn="ಸಲ್ಲಿಸಿ">SUBMIT</a>
                     </div>
 
                     <!-- Receiver Form -->
                     <div class="form-section" id="receiver-form" style="display: none;">
-                        <input type="text" id="receiver-hospital" data-en-placeholder="Hospital Name" data-hi-placeholder="अस्पताल का नाम" data-odia-placeholder="ହସ୍ପିଟାଲ ନାମ" data-kn-placeholder="ಆಸ್ಪತ್ರೆಯ ಹೆಸರು">
+                        <input type="text" id="receiver-hospital" placeholder="Hospital Name" data-en-placeholder="Hospital Name" data-hi-placeholder="अस्पताल का नाम" data-odia-placeholder="ହସ୍ପିଟାଲ ନାମ" data-kn-placeholder="ಆಸ್ಪತ್ರೆಯ ಹೆಸರು">
                         <select id="receiver-blood-group">
                             <option value="" data-en="Select Blood Group" data-hi="रक्त समूह चुनें" data-odia="ରକ୍ତ ଗ୍ରୁପ୍ ଚୟନ କରନ୍ତୁ" data-kn="ರಕ್ತದ ಗುಂಪು ಆಯ್ಕೆಮಾಡಿ">Select Blood Group</option>
                             <option value="A+">A+</option>
@@ -333,7 +333,7 @@
                 </div>
                 <div class="nav-item">
                     <i class="fas fa-bell" onclick="navigateTo('disaster-mode-screen')"></i>
-                    <span class="nav-tooltip" data-en="Disaster Mode: This button is for the disaster mode feature" data-hi="आपदा मोड: यह बटन आपदा मोड सुविधा के लिए है" data-odia="ବିପର୍ଯ୍ୟୟ ମୋଡ୍: ଏହି ବଟନ ବିପର୍ଯ୍ୟୟ ମୋଡ ସୁବିଧା ପାଇଁ" data-kn="ವಿಪತ್ತು ಮೋಡ್: ಈ ಬಟನ್ ವಿಪತ್ತು ಮೋಡ್ ಸೌಲಭ್ಯಕ್ಕಾಗಿ">Disaster Mode: This button is for the disaster mode feature</span>
+                    <span class="nav-tooltip" data-en="Disaster Mode: This button is for the disaster mode feature" data-hi="आपदा मोड: यह बटन आपदा मोड सुविधा के लिए है" data-odia="ବିପର୍ଯ୍ୟୟ ମୋଡ୍: ଏହି ବଟନ ବିପର୍ଯ୍ୟୟ ମୋଡ ସୁବିଧା ପାଇଁ" data-kn  data-kn="ವಿಪತ್ತು ಮೋಡ್: ಈ ಬಟನ್ ವಿಪತ್ತು ಮೋಡ್ ಸೌಲಭ್ಯಕ್ಕಾಗಿ">Disaster Mode: This button is for the disaster mode feature</span>
                 </div>
             </div>
         </div>
@@ -525,88 +525,52 @@
             </div>
         </div>
     </div>
-
+    <script src="script.js"></script>
     <script>
         function changeLanguage() {
             const lang = document.querySelector('#language-select').value || 'en';
             document.querySelectorAll('[data-en]').forEach(element => {
                 const text = element.getAttribute(`data-${lang}`);
                 if (text) {
-                    // Handle elements with text content
+                    // Handle input and textarea placeholders
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = text;
-                    } else if (element.tagName === 'SELECT') {
-                        // For select options, update the displayed text
+                        const placeholder = element.getAttribute(`data-${lang}-placeholder`) || text;
+                        element.placeholder = placeholder;
+                    }
+                    // Handle select options
+                    else if (element.tagName === 'SELECT') {
                         Array.from(element.options).forEach(option => {
-                            const optionText = option.getAttribute(`data-${lang}`);
+                            const optionText = option.getAttribute(`data-${lang}`) || option.getAttribute(`data-${lang}-placeholder`);
                             if (optionText) {
                                 option.text = optionText;
                             }
                         });
-                    } else {
-                        // For other elements like h1, p, a, etc.
-                        // Preserve child elements like <a> in the "New user? Sign up" text
-                        if (element.childNodes.length > 1) {
-                            const child = element.querySelector('a');
-                            if (child) {
-                                element.firstChild.textContent = text.split(' ')[0] + ' '; // Text before the link
-                                child.textContent = text.split(' ')[2]; // Link text
-                            }
-                        } else {
-                            element.textContent = text;
-                        }
+                    }
+                    // Handle elements with child nodes (e.g., <p>New user? <a>Sign up</a></p>)
+                    else if (element.childNodes.length > 1 && element.querySelector('a')) {
+                        const child = element.querySelector('a');
+                        const textParts = text.split(' ');
+                        element.firstChild.textContent = textParts.slice(0, -2).join(' ') + ' ';
+                        child.textContent = textParts.slice(-2).join(' ');
+                    }
+                    // Handle regular text elements
+                    else {
+                        element.textContent = text;
                     }
                 }
             });
-            // Update the HTML lang attribute
+
+            // Update tooltips separately as they have a different structure
+            document.querySelectorAll('.nav-tooltip').forEach(tooltip => {
+                const tooltipText = tooltip.getAttribute(`data-${lang}`);
+                if (tooltipText) {
+                    tooltip.textContent = tooltipText;
+                }
+            });
+
+            // Update HTML lang attribute for accessibility
             document.documentElement.lang = lang;
         }
-
-        // Call changeLanguage on page load to set the initial language
-        document.addEventListener('DOMContentLoaded', changeLanguage);
-
-        // Placeholder for other functions (assuming they exist in script.js)
-        function navigateTo(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
-
-        function updateBloodForm() {
-            const role = document.getElementById('blood-role').value;
-            document.getElementById('donor-form').style.display = role === 'donor' ? 'block' : 'none';
-            document.getElementById('receiver-form').style.display = role === 'receiver' ? 'block' : 'none';
-        }
-
-        function submitBloodForm(type) {
-            alert(`${type} form submitted`);
-        }
-
-        function selectHospital(name, distance, time) {
-            document.getElementById('eta-text').textContent = `ETA to ${name}: ${time}`;
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-        }
-
-        function submitReport() {
-            alert('Report submitted');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chat-input');
-            if (input.value.trim()) {
-                const messages = document.getElementById('chat-messages');
-                const message = document.createElement('div');
-                message.classList.add('message', 'right');
-                message.textContent = input.value;
-                messages.appendChild(message);
-                input.value = '';
-            }
-        }
-    </script>
-</body>
+        </script>
+    </body>
 </html>
